@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.xml.crypto.Data;
+import java.sql.Date;
 
 @Entity
 public class Schedule {
@@ -12,9 +13,16 @@ public class Schedule {
     @GeneratedValue
     private int id;
 
-    private Data date;
+    private Date date;
 
     private int movieId;
+
+    public Schedule() {}
+
+    public Schedule(int id, Date date) {
+        this.date = date;
+        this.id = id;
+    }
 
     public void setId(int id) {
         this.id = id;

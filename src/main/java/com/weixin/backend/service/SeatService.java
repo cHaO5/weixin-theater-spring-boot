@@ -13,9 +13,13 @@ public class SeatService {
     @Autowired
     SeatRepository seatRepository;
 
-    public void reserveSeat(String id, String seat, Date date) {}
+    public Seat reserveSeat(String userId, String seat, Date date) {
+        return seatRepository.save(new Seat(userId, seat, date));
+    }
 
-    public void cancellation(String id, String seat, Date date) {}
+    public void cancellation(String userId, String seat, Date date) {
+        seatRepository.deleteByUserIdAndSeatAndDate(userId, seat, date);
+    }
 
     public List<Seat> findReservation(String userId) {
         return seatRepository.findByUserId(userId);

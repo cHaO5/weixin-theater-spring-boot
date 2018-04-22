@@ -17,18 +17,15 @@ public class ReservationController {
     @Autowired
     SeatService seatService;
 
-    // Only maintain one seat table. Clear it every week.
     @RequestMapping(method = RequestMethod.POST)
     public Result reserveSeat(@PathVariable String id,
                               @RequestBody SeatModel seat) {
         seatService.reserveSeat(id, seat.getSeat(), seat.getDate());
-        return ;
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public Result cancellation(@PathVariable String id,
                                @RequestBody SeatModel seat) {
         seatService.cancellation(id, seat.getSeat(), seat.getDate());
-        return ;
     }
 }

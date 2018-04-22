@@ -12,11 +12,19 @@ public class Seat {
     @GeneratedValue
     private int id;
 
-    private String audience;
+    private String userId;
 
-    private int number;
+    private String seat;
 
     private Date date;
+
+    public Seat() {}
+
+    public Seat(String userId, String seat, Date date) {
+        this.userId = userId;
+        this.seat = seat;
+        this.date = date;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -26,20 +34,20 @@ public class Seat {
         return id;
     }
 
-    public String getAudience() {
-        return audience;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setAudience(String audience) {
-        this.audience = audience;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public int getNumber() {
-        return number;
+    public String getSeat() {
+        return seat;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setSeat(String seat) {
+        this.seat = seat;
     }
 
     public void setDate(Date date) {
