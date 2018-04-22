@@ -3,7 +3,7 @@ package com.weixin.backend.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.xml.crypto.Data;
+import java.sql.Date;
 
 @Entity
 public class Seat {
@@ -15,6 +15,8 @@ public class Seat {
     private String audience;
 
     private int number;
+
+    private Date date;
 
     public void setId(int id) {
         this.id = id;
@@ -38,5 +40,13 @@ public class Seat {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }

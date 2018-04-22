@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    private int id;
+    private String id;
 
     private String nickname;
 
@@ -19,11 +19,11 @@ public class User {
 
     private String grade;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
