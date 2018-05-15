@@ -11,15 +11,15 @@ import java.util.List;
 
 @Service
 public class UserMovieService {
-    @Autowired
-    UserMovieRepository userMovieRepository;
-
-    @Autowired
-    SeatRepository seatRepository;
-
-    public List<UserMovie> findMovies(String userId) {
-        return userMovieRepository.findByUserId(userId);
-    }
-
+//    @Autowired
+//    UserMovieRepository userMovieRepository;
+//
+//    @Autowired
+//    SeatRepository seatRepository;
+//
+//    public List<UserMovie> findMovies(String userId) {
+//        return userMovieRepository.findByUserId(userId);
+//    }
+//
 
 }

@@ -10,18 +10,18 @@ import java.util.List;
 
 @Service
 public class SeatService {
-    @Autowired
-    SeatRepository seatRepository;
-
-    public Seat reserveSeat(String userId, String seat, Date date) {
-        return seatRepository.save(new Seat(userId, seat, date));
-    }
-
-    public void cancellation(String userId, String seat, Date date) {
-        seatRepository.deleteByUserIdAndSeatAndDate(userId, seat, date);
-    }
-
-    public List<Seat> findReservation(String userId) {
-        return seatRepository.findByUserId(userId);
-    }
+//    @Autowired
+//    SeatRepository seatRepository;
+//
+//    public Seat reserveSeat(String userId, String seat, Date date) {
+//        return seatRepository.save(new Seat(userId, seat, date));
+//    }
+//
+//    public void cancellation(String userId, String seat, Date date) {
+//        seatRepository.deleteByUserIdAndSeatAndDate(userId, seat, date);
+//    }
+//
+//    public List<Seat> findReservation(String userId) {
+//        return seatRepository.findByUserId(userId);
+//    }
 }

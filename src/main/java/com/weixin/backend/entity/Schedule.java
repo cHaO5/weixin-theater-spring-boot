@@ -3,7 +3,6 @@ package com.weixin.backend.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.xml.crypto.Data;
 import java.sql.Date;
 
 @Entity
@@ -32,11 +31,11 @@ public class Schedule {
         return id;
     }
 
-    public Data getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Data date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

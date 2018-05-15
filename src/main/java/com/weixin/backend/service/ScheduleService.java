@@ -10,22 +10,22 @@ import java.util.List;
 
 @Service
 public class ScheduleService {
-    @Autowired
-    ScheduleRepository scheduleRepository;
+//    @Autowired
+//    ScheduleRepository scheduleRepository;
 
-    public Schedule findByDate(Date date) {
-        scheduleRepository.getByDate(date);
-    }
+//    public Schedule findByDate(Date date) {
+//        scheduleRepository.getByDate(date);
+//    }
 
-    public List<Schedule> findAll() {
-        return scheduleRepository.findAll();
-    }
+//    public List<Schedule> findAll() {
+//        return scheduleRepository.findAll();
+//    }
 
-    public Schedule save(Schedule s) {
-        scheduleRepository.save(s);
-    }
+//    public Schedule save(Schedule s) {
+//        scheduleRepository.save(s);
+//    }
 
-    public int deleteSchedule(int movieId, Date date) {
-        return scheduleRepository.deleteByMovieIdAndDate(movieId, date);
-    }
+//    public int deleteSchedule(int movieId, Date date) {
+//        return scheduleRepository.deleteByMovieIdAndDate(movieId, date);
+//    }
 }
