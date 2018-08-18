@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface UserMovieRepository extends JpaRepository<UserMovie, Integer> {
-//    List<UserMovie> findByUserId(String userId);
+    List<UserMovie> findByUserId(String userId);
 }

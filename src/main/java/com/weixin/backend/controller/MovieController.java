@@ -17,25 +17,25 @@ import java.sql.Date;
 @RestController
 @RequestMapping(value = "/movies")
 public class MovieController {
-//    @Autowired
-//    MovieService movieService;
-//
-//    @Autowired
-//    ScheduleService scheduleService;
+    @Autowired
+    MovieService movieService;
 
-//    @ApiOperation(value = "Movie to be shown in this week", notes = "")
-//    @ApiImplicitParam()
-//    @RequestMapping(method = RequestMethod.GET)
-//    public Result movieThisWeek(@RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
-//        scheduleService.findByDate(date);
-//    }
-//
-//    @ApiOperation(value = "Most popular movies", notes = "Based on rate")
-//    @RequestMapping(value = "")
-//    public Result mostPopular() {}
-//
-//    @ApiOperation(value = "Recommended movies", notes = "From Weixin Theater")
-//    @RequestMapping(value = "")
-//    public Result recommendation() {}
+    @Autowired
+    ScheduleService scheduleService;
+
+    @ApiOperation(value = "Movie to be shown in this week", notes = "")
+    @ApiImplicitParam()
+    @RequestMapping(method = RequestMethod.GET)
+    public Result movieThisWeek(@RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
+        scheduleService.findByDate(date);
+    }
+
+    @ApiOperation(value = "Most popular movies", notes = "Based on rate")
+    @RequestMapping(value = "")
+    public Result mostPopular() {}
+
+    @ApiOperation(value = "Recommended movies", notes = "From Weixin Theater")
+    @RequestMapping(value = "")
+    public Result recommendation() {}
 
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Integer> {
-//    List<Seat> findByUserId(String userId);
-//
-//    void deleteByUserIdAndSeatAndDate(String userId, String seat, Date date);
+    List<Seat> findByUserId(String userId);
+
+    void deleteByUserIdAndSeatAndDate(String userId, String seat, Date date);
 }
