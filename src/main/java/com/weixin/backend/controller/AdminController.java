@@ -62,5 +62,5 @@ public class AdminController {
 
     @ApiOperation(value = "Get seating of audience", notes = "")
     @RequestMapping(value = "/audiences", method = RequestMethod.GET)
-    public Result getAudience() {}
+    public Result export() {}
 }

@@ -13,7 +13,7 @@ public class SeatService {
     @Autowired
     SeatRepository seatRepository;
 
-    public Seat reserveSeat(String userId, String seat, Date date) {
+    public Seat reservation(String userId, String seat, Date date) {
         return seatRepository.save(new Seat(userId, seat, date));
     }
 

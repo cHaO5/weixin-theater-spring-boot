@@ -20,16 +20,25 @@ public class ReservationController {
     @Autowired
     SeatService seatService;
 
+    // for admin
+    // get reservation by date
+    public Result getReservationByDate() {}
+
+    // for users to check their own res info
+    public Result getReservationByUser() {}
+
     @ApiOperation(value = "Reserve seat", notes = "Reserve seat for user")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "User id", required = true, dataType = "String", paramType = "path"),
             @ApiImplicitParam(name = "seat", value = "Theater seat", required = true, dataType = "SeatModel", paramType = "body")
     })
     @RequestMapping(method = RequestMethod.POST)
-    public Result reserveSeat(@PathVariable String id,
+    public Result addReservation(@PathVariable String id,
                               @RequestBody SeatModel seat) {
-        seatService.reserveSeat(id, seat.getSeat(), seat.getDate());
+        seatService.reservation(id, seat.getSeat(), seat.getDate());
     }
+
+    public Result updateReservation() {}
 
     @ApiOperation(value = "Cancel reservation", notes = "Cancel reservation for user")
     @ApiImplicitParams({
@@ -41,4 +50,6 @@ public class ReservationController {
                                @RequestBody SeatModel seat) {
         seatService.cancellation(id, seat.getSeat(), seat.getDate());
     }
+
+    public Result watchingHistory() {}
 }

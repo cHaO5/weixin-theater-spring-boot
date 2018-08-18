@@ -23,6 +23,8 @@ public class MovieController {
     @Autowired
     ScheduleService scheduleService;
 
+    public Result getMovie() {}
+
     @ApiOperation(value = "Movie to be shown in this week", notes = "")
     @ApiImplicitParam()
     @RequestMapping(method = RequestMethod.GET)
@@ -30,9 +32,11 @@ public class MovieController {
         scheduleService.findByDate(date);
     }
 
+    public Result previousMovis() {}
+
     @ApiOperation(value = "Most popular movies", notes = "Based on rate")
     @RequestMapping(value = "")
-    public Result mostPopular() {}
+    public Result hot() {}
 
     @ApiOperation(value = "Recommended movies", notes = "From Weixin Theater")
     @RequestMapping(value = "")
