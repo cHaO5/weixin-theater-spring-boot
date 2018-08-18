@@ -16,14 +16,14 @@ public class Seat {
 
     private String seat;
 
-    private Date date;
+    private int scheduleId;
 
     public Seat() {}
 
-    public Seat(String userId, String seat, Date date) {
+    public Seat(String userId, String seat, int scheduleId) {
         this.userId = userId;
         this.seat = seat;
-        this.date = date;
+        this.scheduleId = scheduleId;
     }
 
     public void setId(int id) {
@@ -50,11 +50,11 @@ public class Seat {
         this.seat = seat;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public int getScheduleId() {
+        return scheduleId;
     }
 
-    public Date getDate() {
-        return date;
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
     }
 }

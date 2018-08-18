@@ -11,21 +11,74 @@ public class Movie {
     @GeneratedValue
     private int id;
 
-    private String name;
+    private String title;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    private int year;
+
+    private String type;
+
+    private float star;
+
+    private String director;
+
+    private String actor;
+
+    // people who watch the movie
+    private String pp;
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public int getYear() {
+        return year;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public float getStar() {
+        return star;
+    }
+
+    public void setStar(float star) {
+        this.star = star;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getActor() {
+        return actor;
+    }
+
+    public void setActor(String actor) {
+        this.actor = actor;
+    }
+
+    public String getPp() {
+        return pp;
+    }
+
+    public void setPp(String pp) {
+        this.pp = pp;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

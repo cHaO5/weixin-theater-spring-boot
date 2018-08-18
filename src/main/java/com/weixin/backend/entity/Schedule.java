@@ -16,11 +16,15 @@ public class Schedule {
 
     private int movieId;
 
+    // 0 - not play; 1 - finished
+    private int state;
+
     public Schedule() {}
 
     public Schedule(int id, Date date) {
         this.date = date;
         this.id = id;
+        this.state = 0;
     }
 
     public void setId(int id) {
@@ -46,4 +50,13 @@ public class Schedule {
     public void setMovieId(int movieId) {
         this.movieId = movieId;
     }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
 }

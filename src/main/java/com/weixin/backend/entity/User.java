@@ -15,7 +15,7 @@ public class User {
 
     private String avatar;
 
-    private String major;
+    private String department;
 
     private String grade;
 
@@ -51,12 +51,12 @@ public class User {
         this.avatar = avatar;
     }
 
-    public String getMajor() {
-        return major;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getGrade() {
