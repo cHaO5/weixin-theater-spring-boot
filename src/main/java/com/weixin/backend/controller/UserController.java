@@ -1,8 +1,11 @@
 package com.weixin.backend.controller;
 
-import com.weixin.backend.service.SeatService;
+import com.weixin.backend.entity.Movie;
+import com.weixin.backend.entity.User;
+import com.weixin.backend.service.ReservationService;
 import com.weixin.backend.service.UserService;
 import com.weixin.backend.util.Result;
+import com.weixin.backend.util.ResultCode;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,34 +14,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    SeatService seatService;
-
-    public Result addInfo() {}
-
     @ApiOperation(value = "Get user information", notes = "via User id")
     @ApiImplicitParam(name = "id", value = "User id", required = true, dataType = "String", paramType = "path")
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Result getInfo(@PathVariable String id) {
-        userService.getUser(id);
+        User user = userService.getUser(id);
+        if (user != null) {
+            return new Result(ResultCode.SUCCESS, user);
+        } else {
+            return new Result(ResultCode.NOT_FOUND);
+        }
     }
 
-    public Result updateInfo() {}
-
-    @ApiOperation(value = "Get films have been watched", notes = "via User id")
-    @ApiImplicitParam(name = "id", value = "User id", required = true, dataType = "String", paramType = "path")
-    @RequestMapping(value = "{id}/movies", method = RequestMethod.GET)
-    public Result watched(@PathVariable String id) {
-        userService.findMovies(id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Result updateInfo(@PathVariable String id) {
+        User user = userService.updateUser(id);
+        if (user != null) {
+            return new Result(ResultCode.SUCCESS, user);
+        } else {
+            return new Result(ResultCode.SYS_ERROR);
+        }
     }
 
     @ApiOperation(value = "Information about Weixin Theater", notes = "")
-    @RequestMapping()
-    public Result about() {}
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public Result about() {
+        return new Result(ResultCode.SUCCESS, "ABOUT");
+    }
 }

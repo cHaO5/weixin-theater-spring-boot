@@ -1,8 +1,11 @@
 package com.weixin.backend.controller;
 
+import com.weixin.backend.entity.Reservation;
 import com.weixin.backend.entity.Schedule;
+import com.weixin.backend.service.ReservationService;
 import com.weixin.backend.service.ScheduleService;
 import com.weixin.backend.util.Result;
+import com.weixin.backend.util.ResultCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -13,12 +16,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin")
 public class AdminController {
     @Autowired
     ScheduleService scheduleService;
+
+    @Autowired
+    ReservationService reservationService;
 
     @ApiOperation(value = "api for test", notes = "test")
     @ApiImplicitParam(value = "id", name = "admin id", required = true, dataType = "String", paramType = "path")
@@ -27,15 +34,40 @@ public class AdminController {
         return new Result();
     }
 
+    @RequestMapping(value = "/schedules/{id}", method = RequestMethod.GET)
+    public Result getScheduleById(@PathVariable int id) {
+        Schedule schedule = scheduleService.findById(id);
+        if (schedule != null) {
+            return new Result(ResultCode.SUCCESS, schedule);
+        } else {
+            return new Result(ResultCode.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/schedules", method = RequestMethod.GET)
+    public Result getSchedule() {
+        List<Schedule> schedules = scheduleService.findAll();
+        if (schedules != null) {
+            return new Result(ResultCode.SUCCESS, schedules);
+        } else {
+            return new Result(ResultCode.NOT_FOUND);
+        }
+    }
+
     @ApiOperation(value = "Add schedule", notes = "Create schedule based on film id and show date")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "Film id", required = true, dataType = "int", paramType = "path"),
             @ApiImplicitParam(name = "date", value = "Show date", required = true, dataType = "Date", paramType = "path")
     })
-    @RequestMapping(value = "schedules/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/schedules/{id}", method = RequestMethod.POST)
     public Result addSchedule(@PathVariable int id,
                               @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
-        scheduleService.save(new Schedule(id, date));
+        boolean res = scheduleService.save(new Schedule(id, date));
+        if (res) {
+            return new Result(ResultCode.SUCCESS);
+        } else {
+            return new Result(ResultCode.SYS_ERROR);
+        }
     }
 
     @ApiOperation(value = "Delete Schedule", notes = "Delete schedule by film id and date")
@@ -43,24 +75,53 @@ public class AdminController {
             @ApiImplicitParam(name = "id", value = "Film id", required = true, dataType = "int", paramType = "path"),
             @ApiImplicitParam(name = "date", value = "Show date", required = true, dataType = "Date", paramType = "path")
     })
-    @RequestMapping(value = "schedules/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/schedules/{id}", method = RequestMethod.DELETE)
     public Result deleteSchedule(@PathVariable int id,
                                  @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
-        scheduleService.deleteSchedule(id, date);
+        boolean res = scheduleService.deleteSchedule(id, date);
+        if (res) {
+            return new Result(ResultCode.SUCCESS);
+        } else {
+            return new Result(ResultCode.SYS_ERROR);
+        }
     }
 
     @ApiOperation(value = "Modify schedule", notes = "Modify schedule via schedule id")
     @ApiImplicitParam(name = "id", value = "Schedule id", required = true, dataType = "int", paramType = "path")
-    @RequestMapping(value = "schedules/{id}", method = RequestMethod.POST)
-    public Result modifySchedule() {}
-
-    @ApiOperation(value = "Get all schedule", notes = "")
-    @RequestMapping(method = RequestMethod.GET)
-    public Result getSchedule() {
-        scheduleService.findAll();
+    @RequestMapping(value = "/schedules/{id}", method = RequestMethod.PUT)
+    public Result modifySchedule(@PathVariable int id,
+                                 @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date,
+                                 @RequestParam int movieId) {
+        Schedule schedule = scheduleService.updateSchedule(id, date, movieId);
+        if (schedule != null) {
+            return new Result(ResultCode.SUCCESS, schedule);
+        } else {
+            return new Result(ResultCode.SYS_ERROR);
+        }
     }
 
-    @ApiOperation(value = "Get seating of audience", notes = "")
-    @RequestMapping(value = "/audiences", method = RequestMethod.GET)
-    public Result export() {}
+    // return certain reservation tables of a schedule
+    @RequestMapping(value = "/schedules/{id}/reservations", method = RequestMethod.GET)
+    public Result checkReservation(@PathVariable int id) {
+        List<Reservation> reservations = reservationService.findResBySchId(id);
+        if (reservations != null) {
+            return new Result(ResultCode.SUCCESS, reservations);
+        } else {
+            return new Result(ResultCode.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/schedules/state", method = RequestMethod.GET)
+    public Result refreshState() {
+        boolean res = scheduleService.refresh();
+        if (res) {
+            return new Result(ResultCode.SUCCESS);
+        } else {
+            return new Result(ResultCode.SYS_ERROR);
+        }
+    }
+
+//    @ApiOperation(value = "Get seating of audience", notes = "")
+//    @RequestMapping(value = "/audiences", method = RequestMethod.GET)
+//    public Result export() {}
 }

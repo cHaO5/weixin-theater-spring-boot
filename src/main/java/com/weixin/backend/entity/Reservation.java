@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.sql.Date;
 
 @Entity
-public class Seat {
+public class Reservation {
 
     @Id
     @GeneratedValue
@@ -18,9 +18,9 @@ public class Seat {
 
     private int scheduleId;
 
-    public Seat() {}
+    public Reservation() {}
 
-    public Seat(String userId, String seat, int scheduleId) {
+    public Reservation(String userId, String seat, int scheduleId) {
         this.userId = userId;
         this.seat = seat;
         this.scheduleId = scheduleId;

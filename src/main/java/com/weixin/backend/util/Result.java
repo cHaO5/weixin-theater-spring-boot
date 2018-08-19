@@ -39,14 +39,20 @@ public class Result {
         this.setMessage(code.msg());
     }
 
-    public Result(ResultCode code, String message) {
-        this.setCode(code);
-        this.setMessage(message);
-    }
+//    public Result(ResultCode code, String message) {
+//        this.setCode(code);
+//        this.setMessage(message);
+//    }
 
     public Result(ResultCode code, String message, Object data) {
         this.setCode(code);
         this.setMessage(message);
+        this.setData(data);
+    }
+
+    public Result(ResultCode code, Object data) {
+        this.setCode(code);
+        this.setMessage(code.msg());
         this.setData(data);
     }
 }

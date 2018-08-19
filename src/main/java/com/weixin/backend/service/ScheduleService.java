@@ -1,6 +1,7 @@
 package com.weixin.backend.service;
 
 import com.weixin.backend.dao.ScheduleRepository;
+import com.weixin.backend.entity.Movie;
 import com.weixin.backend.entity.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class ScheduleService {
     @Autowired
     ScheduleRepository scheduleRepository;
 
-    public Schedule findByDate(Date date) {
+    public Movie findByDate(Date date) {
         scheduleRepository.getByDate(date);
     }
 
@@ -21,11 +22,11 @@ public class ScheduleService {
         return scheduleRepository.findAll();
     }
 
-    public Schedule save(Schedule s) {
+    public boolean save(Schedule s) {
         scheduleRepository.save(s);
     }
 
-    public int deleteSchedule(int movieId, Date date) {
+    public boolean deleteSchedule(int movieId, Date date) {
         return scheduleRepository.deleteByMovieIdAndDate(movieId, date);
     }
 }
