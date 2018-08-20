@@ -13,4 +13,8 @@ public class UserService {
     public User getUser(String id) {
         return userRepository.getById(id);
     }
+
+    public User updateUser(String id) {
+        return userRepository.updateUser(id);
+    }
 }

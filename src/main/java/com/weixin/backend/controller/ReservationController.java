@@ -102,4 +102,15 @@ public class ReservationController {
             return new Result(ResultCode.SYS_ERROR);
         }
     }
+
+    // return certain reservation tables of a schedule
+    @RequestMapping(value = "/schedules/{id}/reservations", method = RequestMethod.GET)
+    public Result checkReservation(@PathVariable int id) {
+        List<Reservation> reservations = reservationService.findResBySchId(id);
+        if (reservations != null) {
+            return new Result(ResultCode.SUCCESS, reservations);
+        } else {
+            return new Result(ResultCode.NOT_FOUND);
+        }
+    }
 }

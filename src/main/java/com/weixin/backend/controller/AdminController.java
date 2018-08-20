@@ -24,9 +24,6 @@ public class AdminController {
     @Autowired
     ScheduleService scheduleService;
 
-    @Autowired
-    ReservationService reservationService;
-
     @ApiOperation(value = "api for test", notes = "test")
     @ApiImplicitParam(value = "id", name = "admin id", required = true, dataType = "String", paramType = "path")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -97,17 +94,6 @@ public class AdminController {
             return new Result(ResultCode.SUCCESS, schedule);
         } else {
             return new Result(ResultCode.SYS_ERROR);
-        }
-    }
-
-    // return certain reservation tables of a schedule
-    @RequestMapping(value = "/schedules/{id}/reservations", method = RequestMethod.GET)
-    public Result checkReservation(@PathVariable int id) {
-        List<Reservation> reservations = reservationService.findResBySchId(id);
-        if (reservations != null) {
-            return new Result(ResultCode.SUCCESS, reservations);
-        } else {
-            return new Result(ResultCode.NOT_FOUND);
         }
     }
 

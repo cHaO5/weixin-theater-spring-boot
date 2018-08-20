@@ -17,11 +17,35 @@ public class ReservationService {
         return reservationRepository.save(new Reservation(userId, seat, date));
     }
 
-    public void cancellation(String userId, String seat, Date date) {
-        reservationRepository.deleteByUserIdAndSeatAndDate(userId, seat, date);
+    public boolean cancellation(int id) {
+        reservationRepository.deleteByUserIdAndSeatAndDate(id);
     }
 
     public List<Reservation> findReservation(String userId) {
         return reservationRepository.findByUserId(userId);
+    }
+
+    public List<Reservation> findByDate(Date date) {
+        return reservationRepository.findByDate(date);
+    }
+
+    public List<Reservation> findAllByUserId(String id) {
+        return reservationRepository.findAddByUserId(id);
+    }
+
+    public Reservation findByUserId(String id) {
+        return reservationRepository.findAddByUserId(id);
+    }
+
+    public List<Reservation> findResBySchId(int id) {
+        return reservationRepository.findResBySchId(id);
+    }
+
+    public boolean addReservation(String id, String seat, Date date) {
+        reservationRepository.addReservation(id, seat, date);
+    }
+
+    public Reservation updateReservation(int id, String seat, Date date) {
+        return reservationRepository.updateReservation(id, seat, date);
     }
 }

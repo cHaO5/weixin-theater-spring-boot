@@ -46,7 +46,7 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/previous", method = RequestMethod.GET)
-    public Result previousMovis(@RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
+    public Result previousMovies(@RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
         List<Movie> movies = movieService.findPreMovies(date);
         if (movies != null) {
             return new Result(ResultCode.SUCCESS, movies);
@@ -77,6 +77,7 @@ public class MovieController {
         }
     }
 
+    // movies watched by user
     @ApiOperation(value = "Get films have been watched", notes = "via User id")
     @ApiImplicitParam(name = "id", value = "User id", required = true, dataType = "String", paramType = "path")
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)

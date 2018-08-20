@@ -14,8 +14,8 @@ public class ScheduleService {
     @Autowired
     ScheduleRepository scheduleRepository;
 
-    public Movie findByDate(Date date) {
-        scheduleRepository.getByDate(date);
+    public Schedule findById(int id) {
+        return scheduleRepository.findById(id);
     }
 
     public List<Schedule> findAll() {
@@ -23,10 +23,18 @@ public class ScheduleService {
     }
 
     public boolean save(Schedule s) {
-        scheduleRepository.save(s);
+        return scheduleRepository.save(s);
     }
 
     public boolean deleteSchedule(int movieId, Date date) {
         return scheduleRepository.deleteByMovieIdAndDate(movieId, date);
+    }
+
+    public Schedule updateSchedule(int id, Date date, int movieId) {
+        return scheduleRepository.updateSchedule(id, date, movieId);
+    }
+
+    public boolean refresh() {
+        return scheduleRepository.refresh();
     }
 }
