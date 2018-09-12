@@ -57,12 +57,7 @@ public class ReservationController {
     }
 
     // user id
-    @ApiOperation(value = "Reserve seat", notes = "Reserve seat for user")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "Reservation id", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "seat", value = "Theater seat", required = true, dataType = "SeatModel", paramType = "body")
-    })
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+   @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public Result addReservation(@PathVariable String id,
                                  @RequestParam String seat,
                                  @RequestParam int scheduleId) {
@@ -89,11 +84,6 @@ public class ReservationController {
     }
 
     // id here is reservation id
-    @ApiOperation(value = "Cancel reservation", notes = "Cancel reservation for user")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "Reservation id", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "seat", value = "Theater seat", required = true, dataType = "SeatModel", paramType = "body")
-    })
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Result cancellation(@PathVariable int id) {
         boolean res = reservationService.cancellation(id);

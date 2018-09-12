@@ -33,8 +33,6 @@ public class MovieController {
         }
     }
 
-    @ApiOperation(value = "Movie to be shown in this week", notes = "")
-    @ApiImplicitParam()
     @RequestMapping(method = RequestMethod.GET)
     public Result movieThisWeek(@RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
         Movie movie = movieService.findMovieByWeek(date);
@@ -55,7 +53,6 @@ public class MovieController {
         }
     }
 
-    @ApiOperation(value = "Most popular movies", notes = "Based on rate")
     @RequestMapping(value = "/hot")
     public Result hot() {
         List<Movie> movies = movieService.hotMovies();
@@ -78,8 +75,6 @@ public class MovieController {
 //    }
 
     // movies watched by user
-    @ApiOperation(value = "Get films have been watched", notes = "via User id")
-    @ApiImplicitParam(name = "id", value = "User id", required = true, dataType = "String", paramType = "path")
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public Result watched(@PathVariable String id) {
         List<Movie> movies = movieService.findWatchedMovies(id);

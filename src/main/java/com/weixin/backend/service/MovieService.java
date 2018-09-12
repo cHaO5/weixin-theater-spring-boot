@@ -28,7 +28,7 @@ public class MovieService {
     }
 
     public List<Movie> hotMovies() {
-        return movieRepository.findByStarGreaterThan(8);
+        return movieRepository.findByStarGreaterThan(9);
     }
 
 //    public List<Movie> recommendation() {

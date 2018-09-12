@@ -24,8 +24,6 @@ public class AdminController {
     @Autowired
     ScheduleService scheduleService;
 
-    @ApiOperation(value = "api for test", notes = "test")
-    @ApiImplicitParam(value = "id", name = "admin id", required = true, dataType = "String", paramType = "path")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Result test() {
         return new Result();
@@ -51,11 +49,6 @@ public class AdminController {
         }
     }
 
-    @ApiOperation(value = "Add schedule", notes = "Create schedule based on film id and show date")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "Film id", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "date", value = "Show date", required = true, dataType = "Date", paramType = "path")
-    })
     @RequestMapping(value = "/schedules/{id}", method = RequestMethod.POST)
     public Result addSchedule(@PathVariable int movieId,
                               @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
@@ -67,11 +60,6 @@ public class AdminController {
         }
     }
 
-    @ApiOperation(value = "Delete Schedule", notes = "Delete schedule by film id and date")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "Film id", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "date", value = "Show date", required = true, dataType = "Date", paramType = "path")
-    })
     @RequestMapping(value = "/schedules/{id}", method = RequestMethod.DELETE)
     public Result deleteSchedule(@PathVariable int scheduleId) {
         boolean res = scheduleService.deleteSchedule(scheduleId);
@@ -82,8 +70,6 @@ public class AdminController {
         }
     }
 
-    @ApiOperation(value = "Modify schedule", notes = "Modify schedule via schedule id")
-    @ApiImplicitParam(name = "id", value = "Schedule id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/schedules/{id}", method = RequestMethod.PUT)
     public Result modifySchedule(@PathVariable int id,
                                  @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date,

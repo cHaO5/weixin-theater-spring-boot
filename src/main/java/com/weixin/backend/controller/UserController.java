@@ -20,8 +20,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @ApiOperation(value = "Get user information", notes = "via User id")
-    @ApiImplicitParam(name = "id", value = "User id", required = true, dataType = "String", paramType = "path")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Result getInfo(@PathVariable String id) {
         User user = userService.getUser(id);
@@ -43,7 +41,6 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value = "Information about Weixin Theater", notes = "")
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public Result about() {
         return new Result(ResultCode.SUCCESS, "ABOUT");
