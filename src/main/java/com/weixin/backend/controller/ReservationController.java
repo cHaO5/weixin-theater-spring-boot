@@ -47,8 +47,8 @@ public class ReservationController {
 
     // return single res info
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Result getReservationByUserId(@RequestParam String id) {
-        Reservation reservation = reservationService.findByUserId(id);
+    public Result getReservationByUserId(@RequestParam int id) {
+        Reservation reservation = reservationService.findById(id);
         if (reservation != null) {
             return new Result(ResultCode.SUCCESS, reservation);
         } else {
@@ -65,22 +65,23 @@ public class ReservationController {
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public Result addReservation(@PathVariable String id,
                                  @RequestParam String seat,
-                                 @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
-        boolean res = reservationService.addReservation(id, seat, date);
-        if (res) {
+                                 @RequestParam int scheduleId) {
+        Reservation res = reservationService.addReservation(id, seat, scheduleId);
+        if (res != null) {
             return new Result(ResultCode.SUCCESS);
         } else {
             return new Result(ResultCode.SYS_ERROR);
         }
     }
 
+    // user change reservation info
     // id here is reservation id
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Result updateReservation(@PathVariable int id,
-                                    @RequestParam String seat,
-                                    @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
-        Reservation reservation = reservationService.updateReservation(id, seat, date);
-        if (reservation != null) {
+                                    @RequestParam String seat) {
+        Date date = new Date(System.currentTimeMillis());
+        boolean reservation = reservationService.updateReservation(id, seat, date);
+        if (reservation) {
             return new Result(ResultCode.SUCCESS, reservation);
         } else {
             return new Result(ResultCode.SYS_ERROR);

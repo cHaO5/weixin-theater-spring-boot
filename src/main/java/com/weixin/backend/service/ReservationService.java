@@ -13,15 +13,15 @@ public class ReservationService {
     @Autowired
     ReservationRepository reservationRepository;
 
-    public Reservation reservation(String userId, String seat, Date date) {
-        return reservationRepository.save(new Reservation(userId, seat, date));
+    public Reservation addReservation(String userId, String seat, int scheduleId) {
+        return reservationRepository.save(new Reservation(userId, seat, scheduleId));
     }
 
     public boolean cancellation(int id) {
-        reservationRepository.deleteByUserIdAndSeatAndDate(id);
+        return reservationRepository.deleteById(id);
     }
 
-    public List<Reservation> findReservation(String userId) {
+    public List<Reservation> findAllByUserId(String userId) {
         return reservationRepository.findByUserId(userId);
     }
 
@@ -29,23 +29,15 @@ public class ReservationService {
         return reservationRepository.findByDate(date);
     }
 
-    public List<Reservation> findAllByUserId(String id) {
-        return reservationRepository.findAddByUserId(id);
-    }
-
-    public Reservation findByUserId(String id) {
-        return reservationRepository.findAddByUserId(id);
+    public Reservation findById(int id) {
+        return reservationRepository.findById(id);
     }
 
     public List<Reservation> findResBySchId(int id) {
-        return reservationRepository.findResBySchId(id);
+        return reservationRepository.findByScheduleId(id);
     }
 
-    public boolean addReservation(String id, String seat, Date date) {
-        reservationRepository.addReservation(id, seat, date);
-    }
-
-    public Reservation updateReservation(int id, String seat, Date date) {
+    public boolean updateReservation(int id, String seat, Date date) {
         return reservationRepository.updateReservation(id, seat, date);
     }
 }

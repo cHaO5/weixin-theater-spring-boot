@@ -22,19 +22,19 @@ public class ScheduleService {
         return scheduleRepository.findAll();
     }
 
-    public boolean save(Schedule s) {
-        return scheduleRepository.save(s);
+    public Schedule addSchedule(int movieId, Date date) {
+        return scheduleRepository.save(new Schedule(movieId, date));
     }
 
-    public boolean deleteSchedule(int movieId, Date date) {
-        return scheduleRepository.deleteByMovieIdAndDate(movieId, date);
+    public boolean deleteSchedule(int scheduleId) {
+        return scheduleRepository.deleteById(scheduleId);
     }
 
-    public Schedule updateSchedule(int id, Date date, int movieId) {
+    public boolean updateSchedule(int id, Date date, int movieId) {
         return scheduleRepository.updateSchedule(id, date, movieId);
     }
 
-    public boolean refresh() {
-        return scheduleRepository.refresh();
+    public boolean updateScheduleState(int scheduleId, int state) {
+        return scheduleRepository.updateScheduleState(scheduleId, state);
     }
 }

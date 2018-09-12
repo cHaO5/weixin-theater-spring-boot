@@ -46,8 +46,8 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/previous", method = RequestMethod.GET)
-    public Result previousMovies(@RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
-        List<Movie> movies = movieService.findPreMovies(date);
+    public Result previousMovies() {
+        List<Movie> movies = movieService.findPreMovies(new Date(System.currentTimeMillis()));
         if (movies != null) {
             return new Result(ResultCode.SUCCESS, movies);
         } else {
@@ -66,16 +66,16 @@ public class MovieController {
         }
     }
 
-    @ApiOperation(value = "Recommended movies", notes = "From Weixin Theater")
-    @RequestMapping(value = "/recommendation")
-    public Result recommendation() {
-        List<Movie> movies = movieService.recommendation();
-        if (movies != null) {
-            return new Result(ResultCode.SUCCESS, movies);
-        } else {
-            return new Result(ResultCode.NOT_FOUND);
-        }
-    }
+//    @ApiOperation(value = "Recommended movies", notes = "From Weixin Theater")
+//    @RequestMapping(value = "/recommendation")
+//    public Result recommendation() {
+//        List<Movie> movies = movieService.recommendation();
+//        if (movies != null) {
+//            return new Result(ResultCode.SUCCESS, movies);
+//        } else {
+//            return new Result(ResultCode.NOT_FOUND);
+//        }
+//    }
 
     // movies watched by user
     @ApiOperation(value = "Get films have been watched", notes = "via User id")

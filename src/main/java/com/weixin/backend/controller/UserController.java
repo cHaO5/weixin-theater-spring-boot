@@ -9,12 +9,10 @@ import com.weixin.backend.util.ResultCode;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -35,9 +33,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Result updateInfo(@PathVariable String id) {
-        User user = userService.updateUser(id);
-        if (user != null) {
+    public Result updateInfo(@PathVariable String id,
+                             @RequestBody Map<String, Object> info) {
+        boolean user = userService.updateUser(id, info);
+        if (user) {
             return new Result(ResultCode.SUCCESS, user);
         } else {
             return new Result(ResultCode.SYS_ERROR);

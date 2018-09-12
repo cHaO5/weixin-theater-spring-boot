@@ -57,10 +57,10 @@ public class AdminController {
             @ApiImplicitParam(name = "date", value = "Show date", required = true, dataType = "Date", paramType = "path")
     })
     @RequestMapping(value = "/schedules/{id}", method = RequestMethod.POST)
-    public Result addSchedule(@PathVariable int id,
+    public Result addSchedule(@PathVariable int movieId,
                               @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
-        boolean res = scheduleService.save(new Schedule(id, date));
-        if (res) {
+        Schedule res = scheduleService.addSchedule(movieId, date);
+        if (res != null) {
             return new Result(ResultCode.SUCCESS);
         } else {
             return new Result(ResultCode.SYS_ERROR);
@@ -73,9 +73,8 @@ public class AdminController {
             @ApiImplicitParam(name = "date", value = "Show date", required = true, dataType = "Date", paramType = "path")
     })
     @RequestMapping(value = "/schedules/{id}", method = RequestMethod.DELETE)
-    public Result deleteSchedule(@PathVariable int id,
-                                 @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
-        boolean res = scheduleService.deleteSchedule(id, date);
+    public Result deleteSchedule(@PathVariable int scheduleId) {
+        boolean res = scheduleService.deleteSchedule(scheduleId);
         if (res) {
             return new Result(ResultCode.SUCCESS);
         } else {
@@ -89,17 +88,19 @@ public class AdminController {
     public Result modifySchedule(@PathVariable int id,
                                  @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date,
                                  @RequestParam int movieId) {
-        Schedule schedule = scheduleService.updateSchedule(id, date, movieId);
-        if (schedule != null) {
+        boolean schedule = scheduleService.updateSchedule(id, date, movieId);
+        if (schedule) {
             return new Result(ResultCode.SUCCESS, schedule);
         } else {
             return new Result(ResultCode.SYS_ERROR);
         }
     }
 
-    @RequestMapping(value = "/schedules/state", method = RequestMethod.GET)
-    public Result refreshState() {
-        boolean res = scheduleService.refresh();
+    // if the schedule is finished
+    @RequestMapping(value = "/schedules/{id}/state/{state}", method = RequestMethod.GET)
+    public Result refreshState(@PathVariable int scheduleId,
+                               @PathVariable int state) {
+        boolean res = scheduleService.updateScheduleState(scheduleId, state);
         if (res) {
             return new Result(ResultCode.SUCCESS);
         } else {

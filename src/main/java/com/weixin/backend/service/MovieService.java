@@ -2,6 +2,7 @@ package com.weixin.backend.service;
 
 import com.weixin.backend.dao.MovieRepository;
 import com.weixin.backend.entity.Movie;
+import com.weixin.backend.util.CalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,11 @@ public class MovieService {
     MovieRepository movieRepository;
 
     public Movie findMovieById(int id) {
-        return movieRepository.findMovieById(id);
+        return movieRepository.findById(id);
     }
 
     public Movie findMovieByWeek(Date date) {
-        return movieRepository.findMovieByWeek(date);
+        return movieRepository.findMovieThisWeek(CalDate.getMonday(date), CalDate.getNextMonday(date));
     }
 
     public List<Movie> findPreMovies(Date date) {
@@ -26,14 +27,14 @@ public class MovieService {
     }
 
     public List<Movie> hotMovies() {
-        return movieRepository.hotMovies();
+        return movieRepository.findByStarGreaterThan(8);
     }
 
-    public List<Movie> recommendation() {
-        return movieRepository.recommendation();
-    }
+//    public List<Movie> recommendation() {
+//        return movieRepository.recommendation();
+//    }
 
     public List<Movie> findWatchedMovies(String id) {
-        return movieRepository.findWatchedMovies(id);
+        return movieRepository.findWatchedMovie(id);
     }
 }

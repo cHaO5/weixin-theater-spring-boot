@@ -18,12 +18,23 @@ public class Reservation {
 
     private int scheduleId;
 
+    private Date date;
+
     public Reservation() {}
 
     public Reservation(String userId, String seat, int scheduleId) {
         this.userId = userId;
         this.seat = seat;
         this.scheduleId = scheduleId;
+        this.date = new Date(System.currentTimeMillis());
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public void setId(int id) {
