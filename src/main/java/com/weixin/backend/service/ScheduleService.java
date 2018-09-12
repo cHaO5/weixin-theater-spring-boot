@@ -30,7 +30,7 @@ public class ScheduleService {
         return scheduleRepository.deleteById(scheduleId);
     }
 
-    public boolean updateSchedule(int id, Date date, int movieId) {
+    public boolean updateSchedule(int id, Date date, String movieId) {
         return scheduleRepository.updateSchedule(id, date, movieId);
     }
 

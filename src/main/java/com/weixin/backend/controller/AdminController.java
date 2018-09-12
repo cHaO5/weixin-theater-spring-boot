@@ -87,7 +87,7 @@ public class AdminController {
     @RequestMapping(value = "/schedules/{id}", method = RequestMethod.PUT)
     public Result modifySchedule(@PathVariable int id,
                                  @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date,
-                                 @RequestParam int movieId) {
+                                 @RequestParam String movieId) {
         boolean schedule = scheduleService.updateSchedule(id, date, movieId);
         if (schedule) {
             return new Result(ResultCode.SUCCESS, schedule);

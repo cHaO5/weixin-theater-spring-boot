@@ -14,7 +14,7 @@ public class Schedule {
 
     private Date date;
 
-    private int movieId;
+    private String movieId;
 
     // 0 - not play; 1 - finished
     private int state;
@@ -43,11 +43,11 @@ public class Schedule {
         this.date = date;
     }
 
-    public int getMovieId() {
+    public String getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(int movieId) {
+    public void setMovieId(String movieId) {
         this.movieId = movieId;
     }
 

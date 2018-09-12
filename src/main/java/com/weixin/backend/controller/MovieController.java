@@ -24,7 +24,7 @@ public class MovieController {
     ScheduleService scheduleService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Result getMovie(@PathVariable int id) {
+    public Result getMovie(@PathVariable String id) {
         Movie movie = movieService.findMovieById(id);
         if (movie != null) {
             return new Result(ResultCode.SUCCESS, movie);

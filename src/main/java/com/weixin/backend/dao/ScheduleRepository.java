@@ -10,10 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
-    List<Schedule> findByUserId(int userId);
-
-    Schedule getByDate(Date date);
-
     Schedule findById(int id);
 
     List<Schedule> findAll();
@@ -21,7 +17,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
     boolean deleteById(int id);
 
     @Query("update Schedule set date = ?1, movieId = ?3 where id = ?1")
-    boolean updateSchedule(int id, Date date, int movieId);
+    boolean updateSchedule(int id, Date date, String movieId);
 
     @Query("update Schedule set state = ?2 where id = ?1")
     boolean updateScheduleState(int schedule, int state);

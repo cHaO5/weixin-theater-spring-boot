@@ -9,7 +9,7 @@ public class Movie {
 
     @Id
     @GeneratedValue
-    private int id;
+    private String id;
 
     private String title;
 
@@ -26,7 +26,7 @@ public class Movie {
     // people who watch the movie
     private String pp;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -78,7 +78,7 @@ public class Movie {
         this.pp = pp;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }
