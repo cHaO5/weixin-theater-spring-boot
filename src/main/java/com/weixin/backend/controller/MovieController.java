@@ -8,6 +8,10 @@ import com.weixin.backend.util.ResultCode;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +27,14 @@ public class MovieController {
     @Autowired
     ScheduleService scheduleService;
 
+    @RequestMapping(method = RequestMethod.GET)
+    public Result getAllMovies(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                               @RequestParam(value = "size", defaultValue = "20") Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return new Result(ResultCode.SUCCESS, movieService.findAll(pageable));
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Result getMovie(@PathVariable String id) {
         Movie movie = movieService.findMovieById(id);
@@ -33,7 +45,7 @@ public class MovieController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/this", method = RequestMethod.GET)
     public Result movieThisWeek(@RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") Date date) {
         Movie movie = movieService.findMovieByWeek(date);
         if (movie != null) {
@@ -54,8 +66,11 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/hot")
-    public Result hot() {
-        List<Movie> movies = movieService.hotMovies();
+    public Result hot(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                      @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "star");
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Movie> movies = movieService.hotMovies(pageable);
         if (movies != null) {
             return new Result(ResultCode.SUCCESS, movies);
         } else {

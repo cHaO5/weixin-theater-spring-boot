@@ -4,6 +4,8 @@ import com.weixin.backend.dao.MovieRepository;
 import com.weixin.backend.entity.Movie;
 import com.weixin.backend.util.CalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,10 @@ import java.util.List;
 public class MovieService {
     @Autowired
     MovieRepository movieRepository;
+
+    public Page<Movie> findAll(Pageable pageable) {
+        return movieRepository.findAll(pageable);
+    }
 
     public Movie findMovieById(String id) {
         return movieRepository.findById(id);
@@ -27,8 +33,8 @@ public class MovieService {
         return movieRepository.findPreMovies(date);
     }
 
-    public List<Movie> hotMovies() {
-        return movieRepository.findByStarGreaterThan(9);
+    public Page<Movie> hotMovies(Pageable pageable) {
+        return movieRepository.findByStarGreaterThan(9, pageable);
     }
 
 //    public List<Movie> recommendation() {
