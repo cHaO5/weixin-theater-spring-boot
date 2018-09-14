@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weixin.backend.mapper.MovieMapper">
+  <resultMap id="BaseResultMap" type="com.weixin.backend.model.Movie">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="actor" jdbcType="VARCHAR" property="actor" />
+    <result column="director" jdbcType="VARCHAR" property="director" />
+    <result column="pp" jdbcType="VARCHAR" property="pp" />
+    <result column="star" jdbcType="REAL" property="star" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, year, actor, director, pp, star, type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from movie
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from movie
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.weixin.backend.model.Movie">
+    insert into movie (id, title, year, 
+      actor, director, pp, 
+      star, type)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, 
+      #{actor,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR}, #{pp,jdbcType=VARCHAR}, 
+      #{star,jdbcType=REAL}, #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weixin.backend.model.Movie">
+    insert into movie
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="actor != null">
+        actor,
+      </if>
+      <if test="director != null">
+        director,
+      </if>
+      <if test="pp != null">
+        pp,
+      </if>
+      <if test="star != null">
+        star,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="actor != null">
+        #{actor,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null">
+        #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="pp != null">
+        #{pp,jdbcType=VARCHAR},
+      </if>
+      <if test="star != null">
+        #{star,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weixin.backend.model.Movie">
+    update movie
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="actor != null">
+        actor = #{actor,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null">
+        director = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="pp != null">
+        pp = #{pp,jdbcType=VARCHAR},
+      </if>
+      <if test="star != null">
+        star = #{star,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weixin.backend.model.Movie">
+    update movie
+    set title = #{title,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      actor = #{actor,jdbcType=VARCHAR},
+      director = #{director,jdbcType=VARCHAR},
+      pp = #{pp,jdbcType=VARCHAR},
+      star = #{star,jdbcType=REAL},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

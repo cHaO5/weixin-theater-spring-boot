@@ -78,6 +78,14 @@ public class Movie {
         this.pp = pp;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
