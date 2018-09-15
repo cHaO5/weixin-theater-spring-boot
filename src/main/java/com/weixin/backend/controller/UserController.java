@@ -1,28 +1,23 @@
 package com.weixin.backend.controller;
 
-import com.weixin.backend.entity.Movie;
 import com.weixin.backend.entity.User;
-import com.weixin.backend.service.ReservationService;
-import com.weixin.backend.service.UserService;
+import com.weixin.backend.service.impl.UserServiceImpl;
 import com.weixin.backend.util.Result;
 import com.weixin.backend.util.ResultCode;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
     @Autowired
-    UserService userService;
+    UserServiceImpl userServiceImpl;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Result getInfo(@PathVariable String id) {
-        User user = userService.getUser(id);
+        User user = userServiceImpl.getUser(id);
         if (user != null) {
             return new Result(ResultCode.SUCCESS, user);
         } else {
@@ -33,7 +28,7 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Result updateInfo(@PathVariable String id,
                              @RequestBody Map<String, Object> info) {
-        boolean user = userService.updateUser(id, info);
+        boolean user = userServiceImpl.updateUser(id, info);
         if (user) {
             return new Result(ResultCode.SUCCESS, user);
         } else {

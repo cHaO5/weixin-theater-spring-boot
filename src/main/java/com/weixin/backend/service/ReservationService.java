@@ -1,43 +1,22 @@
 package com.weixin.backend.service;
 
-import com.weixin.backend.dao.ReservationRepository;
 import com.weixin.backend.entity.Reservation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
 
-@Service
-public class ReservationService {
-    @Autowired
-    ReservationRepository reservationRepository;
+public interface ReservationService {
+    Reservation addReservation(String userId, String seat, int scheduleId);
 
-    public Reservation addReservation(String userId, String seat, int scheduleId) {
-        return reservationRepository.save(new Reservation(userId, seat, scheduleId));
-    }
+    boolean cancellation(int id);
 
-    public boolean cancellation(int id) {
-        return reservationRepository.deleteById(id);
-    }
+    List<Reservation> findAllByUserId(String userId);
 
-    public List<Reservation> findAllByUserId(String userId) {
-        return reservationRepository.findByUserId(userId);
-    }
+    List<Reservation> findByDate(Date date);
 
-    public List<Reservation> findByDate(Date date) {
-        return reservationRepository.findByDate(date);
-    }
+    Reservation findById(int id);
 
-    public Reservation findById(int id) {
-        return reservationRepository.findById(id);
-    }
+    List<Reservation> findResBySchId(int id);
 
-    public List<Reservation> findResBySchId(int id) {
-        return reservationRepository.findByScheduleId(id);
-    }
-
-    public boolean updateReservation(int id, String seat, Date date) {
-        return reservationRepository.updateReservation(id, seat, date);
-    }
+    boolean updateReservation(int id, String seat, Date date);
 }
