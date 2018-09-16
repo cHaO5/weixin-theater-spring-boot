@@ -13,10 +13,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Override
     public User getUser(String id) {
         return userRepository.findById(id);
     }
 
+    @Override
     public boolean updateUser(String id, Map<String, Object> info) {
         return userRepository.updateUser(
                 id,
